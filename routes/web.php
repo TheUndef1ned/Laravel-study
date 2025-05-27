@@ -2,18 +2,24 @@
 
 use Illuminate\Support\Facades\Route;
 
-
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get(uri: '/posts', action: 'App\Http\Controllers\PostController@index')->name(name: 'posts.index');
-Route::get(uri: '/posts/create', action: 'App\Http\Controllers\PostController@create');
-Route::get(uri: '/posts/update', action: 'App\Http\Controllers\PostController@update');
-Route::get(uri: '/posts/delete', action: 'App\Http\Controllers\PostController@delete');
-Route::get(uri: '/posts/first_or_create', action: 'App\Http\Controllers\PostController@firstOrCreate');
-Route::get(uri: '/posts/update_or_create', action: 'App\Http\Controllers\PostController@updateOrCreate');
+Route::get('/posts', 'App\Http\Controllers\PostController@index')->name('post.index');
+Route::get('/posts/create', 'App\Http\Controllers\PostController@create')->name('post.create');
 
-Route::get(uri: '/main', action: 'App\Http\Controllers\MainController@index')->name(name: 'main.index');
-Route::get(uri: '/contacts', action: 'App\Http\Controllers\ContactController@index')->name(name: 'contacts.index');
-Route::get(uri: '/about', action: 'App\Http\Controllers\AboutController@index')->name(name: 'about.index');
+Route::post('/posts/store', 'App\Http\Controllers\PostController@store')->name('post.store');
+Route::get('/posts/{post}', 'App\Http\Controllers\PostController@show')->name('post.show');
+Route::get('/posts/{post}/edit', 'App\Http\Controllers\PostController@edit')->name('post.edit');
+Route::patch('/posts/{post}', 'App\Http\Controllers\PostController@update')->name('post.update');
+Route::delete('/posts/{post}', 'App\Http\Controllers\PostController@destroy')->name('post.delete');
+
+Route::get('/posts/update', 'App\Http\Controllers\PostController@update');
+Route::get('/posts/delete', 'App\Http\Controllers\PostController@delete');
+Route::get('/posts/first_or_create', 'App\Http\Controllers\PostController@firstOrCreate');
+Route::get('/posts/update_or_create', 'App\Http\Controllers\PostController@updateOrCreate');
+
+Route::get('/main', 'App\Http\Controllers\MainController@index')->name('main.index');
+Route::get('/contacts', 'App\Http\Controllers\ContactController@index')->name('contacts.index');
+Route::get('/about', 'App\Http\Controllers\AboutController@index')->name('about.index');

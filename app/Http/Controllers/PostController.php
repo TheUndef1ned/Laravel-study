@@ -2,47 +2,82 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\Tag;
+use App\Models\TagPost;
 use App\Models\Post;
 
-class PostController
+class PostController extends Controller
 {
     public function index()
     {
         $posts = Post::all();
-        return view('posts.index', compact('posts'));
+        return view('post.index', compact('posts'));
     }
 
     public function create()
     {
-        return view('posts.create');
+        $categories = Category::all();
+        $tags = Tag::all();
+
+        return view('post.create', compact('categories', 'tags'));
     }
 
     public function store()
     {
         $data = request()->validate([
-            'title' => 'required',
-            'body' => 'required',
+            "title" => 'string',
+            "content" => 'string',
+            "image" => 'string',
+            "category_id" => '',
+            'tags' => 'nullable|array',
         ]);
+
+        $tags = $data['tags'];
+        unset($data['tags']);
+
+        $post = Post::create($data);
+
+        $post->tags()->attach($tags);
+
+        /*foreach (21121212$tags as $tag) {
+            TagPost::firstOrCreate([
+                'tag_id' => $tag,
+                'post_id' => $post->id,
+            ]);
+        } 999*/
+        return redirect()->route('post.index');
     }
 
     public function show(Post $post)
     {
-        return view('posts.show', compact('post'));
+        return view('post.show', compact('post'));
     }
 
     public function update(Post $post)
     {
         $data = request()->validate([
-            'title' => 'required',
-            'body' => 'required',
+            "title" => 'string',
+            "content" => 'string',
+            "image" => 'string',
+            "category_id" => '',
+            'tags' => '',
         ]);
+
+        $tags = $data['tags'];
+        unset($data['tags']);
+
         $post->update($data);
-        return redirect('/posts');
+        $post->tags()->sync($tags);
+        return redirect()->route('post.show', $post->id);
     }
 
     public function edit(Post $post)
     {
-        return view('posts.edit', compact('post'));
+        $categories = Category::all();
+        $tags = Tag::all();
+
+        return view('post.edit', compact('post', 'categories', 'tags'));
     }
 
     public function destroy(Post $post)
