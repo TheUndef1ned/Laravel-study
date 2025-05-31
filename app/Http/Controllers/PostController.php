@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Tag;
-use App\Models\TagPost;
+use App\Models\PostTag;
 use App\Models\Post;
 
 class PostController extends Controller
