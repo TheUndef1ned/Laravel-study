@@ -40,12 +40,6 @@ class PostController extends Controller
 
         $post->tags()->attach($tags);
 
-        /*foreach (21121212$tags as $tag) {
-            TagPost::firstOrCreate([
-                'tag_id' => $tag,
-                'post_id' => $post->id,
-            ]);
-        } 999*/
         return redirect()->route('post.index');
     }
 

@@ -19,7 +19,7 @@ class Post extends Model
         return $this->belongsTo(related: Category::class, foreignKey: 'category_id', ownerKey: 'id');
     }
 
-    public function tag()
+    public function tags()
     {
         return $this->belongsToMany(Tag::class, 'post_tags', 'post_id', 'tag_id');
     }

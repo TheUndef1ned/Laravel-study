@@ -13,16 +13,16 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{ route('main.index') }}">Main</a>
+                        <a class="nav-link active" aria-current="page" href="{{ route('main.index') }}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('post.index') }}">Posts</a>
+                        <a class="nav-link active" aria-current="page" href="{{ route('post.index') }}">Posts</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('about.index') }}">About</a>
+                        <a class="nav-link ac" aria-current="page" href="{{ route('about.index') }}">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('contacts.index') }}">Contacts</a>
+                        <a class="nav-link active" aria-current="page" href="{{ route('contacts.index') }}">Contacts</a>
                     </li>
                 </ul>
             </div>
